@@ -15,6 +15,10 @@ class Strawberry2
     "#{@type}: #{@size}"
   end
 
+  def same_size_as?(another)
+    true
+  end
+
   private
 
   def self.weight_to_size(weight)

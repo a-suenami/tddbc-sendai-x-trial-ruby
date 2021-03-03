@@ -69,4 +69,13 @@ describe Strawberry2 do
       it_should_behave_like 'サイズから作成したオブジェクト'
     end
   end
+
+  describe '#same_size_as?' do
+    let(:type) { ['あまおう', 'とちおとめ', 'さがほのか'].sample }
+    subject { Strawberry2.factory(type, size: 'LL') }
+    it do
+      another = Strawberry2.factory(type, size: 'LL')
+      is_expected.to be_same_size_as(another)
+    end
+  end
 end
