@@ -12,7 +12,7 @@ class Strawberry
   end
 
   def to_s
-    "#{@type}: #{@weight}g"
+    "#{@type}: #{@weight}g(#{size})"
   end
 
   def size

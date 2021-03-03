@@ -13,11 +13,11 @@ describe Strawberry do
   describe '#to_s' do
     describe 'あまおう: 30g' do
       let(:strawberry) { Strawberry.new('あまおう', 30) }
-      it { expect(strawberry.to_s).to eq 'あまおう: 30g' }
+      it { expect(strawberry.to_s).to eq 'あまおう: 30g(L)' }
     end
     describe 'とちおとめ: 20g' do
       let(:strawberry) { Strawberry.new('とちおとめ', 20) }
-      it { expect(strawberry.to_s).to eq 'とちおとめ: 20g' }
+      it { expect(strawberry.to_s).to eq 'とちおとめ: 20g(L)' }
     end
   end
 
