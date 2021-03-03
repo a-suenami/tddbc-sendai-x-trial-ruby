@@ -1,11 +1,13 @@
 class Strawberry2
-  def initialize(type, size)
+  private def initialize(type, size)
     @type = type
     @size = size
   end
 
-  def self.factory(type, weight: nil)
-    size = weight_to_size(weight)
+  def self.factory(type, weight: nil, size: nil)
+    if weight
+      size = weight_to_size(weight)
+    end
     new(type, size)
   end
 

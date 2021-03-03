@@ -1,16 +1,4 @@
 describe Strawberry2 do
-  describe '#to_s' do
-    describe 'あまおう: L' do
-      let(:strawberry) { Strawberry2.new('あまおう', 'L') }
-      it { expect(strawberry.to_s).to eq 'あまおう: L' }
-    end
-
-    describe 'とちおとめ: S' do
-      let(:strawberry) { Strawberry2.new('とちおとめ', 'S') }
-      it { expect(strawberry.to_s).to eq 'とちおとめ: S' }
-    end
-  end
-
   describe '.factory' do
     shared_examples_for '重さから作成したオブジェクト' do
       let(:type) { ['あまおう', 'とちおとめ', 'さがほのか'].sample }
@@ -52,6 +40,33 @@ describe Strawberry2 do
       let(:weight) { 9 }
       let(:expected) { "#{type}: S" }
       it_should_behave_like '重さから作成したオブジェクト'
+    end
+
+    shared_examples_for 'サイズから作成したオブジェクト' do
+      let(:type) { ['あまおう', 'とちおとめ', 'さがほのか'].sample }
+      subject { Strawberry2.factory(type, size: size).to_s }
+      it { is_expected.to eq expected }
+    end
+
+    describe 'LL' do
+      let(:size) { 'LL' }
+      let(:expected) { "#{type}: LL" }
+      it_should_behave_like 'サイズから作成したオブジェクト'
+    end
+    describe 'L' do
+      let(:size) { 'L' }
+      let(:expected) { "#{type}: L" }
+      it_should_behave_like 'サイズから作成したオブジェクト'
+    end
+    describe 'M' do
+      let(:size) { 'M' }
+      let(:expected) { "#{type}: M" }
+      it_should_behave_like 'サイズから作成したオブジェクト'
+    end
+    describe 'S' do
+      let(:size) { 'S' }
+      let(:expected) { "#{type}: S" }
+      it_should_behave_like 'サイズから作成したオブジェクト'
     end
   end
 end
