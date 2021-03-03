@@ -1,5 +1,5 @@
 class Strawberry2
-  attr_reader :size
+  attr_reader :type, :size
 
   private def initialize(type, size)
     @type = type
