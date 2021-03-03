@@ -17,8 +17,8 @@ class Strawberry2
     "#{@type}: #{@size}"
   end
 
-  def same_size_as?(another)
-    self.size == another.size
+  def size_diff_from(another)
+    0
   end
 
   private

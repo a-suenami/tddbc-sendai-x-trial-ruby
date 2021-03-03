@@ -70,17 +70,14 @@ describe Strawberry2 do
     end
   end
 
-  describe '#same_size_as?' do
+  describe '#size_diff_from' do
     let(:type) { ['あまおう', 'とちおとめ', 'さがほのか'].sample }
     subject { Strawberry2.factory(type, size: 'LL') }
-    it do
-      another = Strawberry2.factory(type, size: 'LL')
-      is_expected.to be_same_size_as(another)
-    end
 
     it do
-      another = Strawberry2.factory(type, size: 'L')
-      is_expected.not_to be_same_size_as(another)
+      another = Strawberry2.factory(type, size: 'LL')
+      diff = subject.size_diff_from(another)
+      expect(diff).to eq 0
     end
   end
 end
