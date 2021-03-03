@@ -77,5 +77,10 @@ describe Strawberry2 do
       another = Strawberry2.factory(type, size: 'LL')
       is_expected.to be_same_size_as(another)
     end
+
+    it do
+      another = Strawberry2.factory(type, size: 'L')
+      is_expected.not_to be_same_size_as(another)
+    end
   end
 end

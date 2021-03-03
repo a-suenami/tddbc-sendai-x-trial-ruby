@@ -1,4 +1,6 @@
 class Strawberry2
+  attr_reader :size
+
   private def initialize(type, size)
     @type = type
     @size = size
@@ -16,7 +18,7 @@ class Strawberry2
   end
 
   def same_size_as?(another)
-    true
+    self.size == another.size
   end
 
   private
