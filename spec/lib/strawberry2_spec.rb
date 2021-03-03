@@ -70,14 +70,33 @@ describe Strawberry2 do
     end
   end
 
-  describe '#size_diff_from' do
+  describe 'サイズ比' do
     let(:type) { ['あまおう', 'とちおとめ', 'さがほのか'].sample }
-    subject { Strawberry2.factory(type, size: 'LL') }
 
-    it do
-      another = Strawberry2.factory(type, size: 'LL')
-      diff = subject.size_diff_from(another)
-      expect(diff).to eq 0
+    [
+      { one: 'LL', another: 'LL', expected: 0 },
+      { one: 'LL', another: 'L',  expected: 1 },
+      { one: 'LL', another: 'M',  expected: 2 },
+      { one: 'LL', another: 'S',  expected: 3 },
+      { one: 'L', another: 'LL',  expected: 1 },
+      { one: 'L', another: 'L',   expected: 0 },
+      { one: 'L', another: 'M',   expected: 1 },
+      { one: 'L', another: 'S',   expected: 2 },
+      { one: 'M', another: 'LL',  expected: 2 },
+      { one: 'M', another: 'L',   expected: 1 },
+      { one: 'M', another: 'M',   expected: 0 },
+      { one: 'M', another: 'S',   expected: 1 },
+      { one: 'S', another: 'LL',  expected: 3 },
+      { one: 'S', another: 'L',   expected: 2 },
+      { one: 'S', another: 'M',   expected: 1 },
+      { one: 'S', another: 'S',   expected: 0 },
+    ].each do |param|
+      context "one=#{param[:one]}, another=#{param[:another]}" do
+        let(:one) { Strawberry2.factory(type, size: param[:one]) }
+        let(:another) { Strawberry2.factory(type, size: param[:another]) }
+        subject { one.size_diff_from(another) }
+        it { is_expected.to eq param[:expected] }
+      end
     end
   end
 end

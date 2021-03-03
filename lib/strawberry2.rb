@@ -18,7 +18,13 @@ class Strawberry2
   end
 
   def size_diff_from(another)
-    0
+    size_value = {
+      'S' => 1,
+      'M' => 2,
+      'L' => 3,
+      'LL' => 4
+    }
+    (size_value[self.size] - size_value[another.size]).abs
   end
 
   private
