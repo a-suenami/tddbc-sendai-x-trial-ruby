@@ -12,5 +12,9 @@ class Strawberry2Pack
     diff2 = @strawberry2.size_diff_from(@strawberry3)
     diff3 = @strawberry3.size_diff_from(@strawberry1)
     [diff1, diff2, diff3].max
+
+    # 別解:
+    # arr = [@strawberry1, @strawberry2, @strawberry3].map(&:size)
+    # arr.product(arr).map{ |a, b| a - b }.max
   end
 end
