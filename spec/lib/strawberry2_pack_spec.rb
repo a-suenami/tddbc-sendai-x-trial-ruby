@@ -19,4 +19,22 @@ describe Strawberry2Pack do
       end
     end
   end
+
+  describe '#max_size_diff' do
+    it '' do
+      strawberry1 = Strawberry2.factory('あまおう', size: 'LL')
+      strawberry2 = Strawberry2.factory('あまおう', size: 'LL')
+      strawberry3 = Strawberry2.factory('あまおう', size: 'LL')
+      pack = Strawberry2Pack.new(strawberry1, strawberry2, strawberry3)
+      expect(pack.max_size_diff).to eq 0
+    end
+
+    it '' do
+      strawberry1 = Strawberry2.factory('あまおう', size: 'LL')
+      strawberry2 = Strawberry2.factory('あまおう', size: 'L')
+      strawberry3 = Strawberry2.factory('あまおう', size: 'LL')
+      pack = Strawberry2Pack.new(strawberry1, strawberry2, strawberry3)
+      expect(pack.max_size_diff).to eq 1
+    end
+  end
 end
