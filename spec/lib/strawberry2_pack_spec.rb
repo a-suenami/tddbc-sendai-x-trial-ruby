@@ -21,20 +21,35 @@ describe Strawberry2Pack do
   end
 
   describe '#max_size_diff' do
-    it '' do
-      strawberry1 = Strawberry2.factory('あまおう', size: 'LL')
-      strawberry2 = Strawberry2.factory('あまおう', size: 'LL')
-      strawberry3 = Strawberry2.factory('あまおう', size: 'LL')
-      pack = Strawberry2Pack.new(strawberry1, strawberry2, strawberry3)
-      expect(pack.max_size_diff).to eq 0
-    end
+    [
+      ['LL', 'LL',                         'LL', 0],
+      ['LL', ['LL', 'L'].sample,           'L',  1],
+      ['LL', ['LL', 'L', 'M'].sample,      'M',  2],
+      ['LL', ['LL', 'L', 'M', 'S'].sample, 'S',  3],
 
-    it '' do
-      strawberry1 = Strawberry2.factory('あまおう', size: 'LL')
-      strawberry2 = Strawberry2.factory('あまおう', size: 'L')
-      strawberry3 = Strawberry2.factory('あまおう', size: 'LL')
-      pack = Strawberry2Pack.new(strawberry1, strawberry2, strawberry3)
-      expect(pack.max_size_diff).to eq 1
+      ['L', 'L',                           'L', 0],
+      ['L', ['L', 'M'].sample,             'M', 1],
+      ['L', 'M',                           'S', 2],
+
+      ['M', 'M',                           'M', 0],
+      ['M', ['M', 'S'].sample,             'S', 1],
+
+      ['S', 'S',                           'S', 0],
+    ].each do |size1, size2, size3, expected|
+      context "max=#{size1}, min=#{size3}" do
+        let(:type) { ['あまおう', 'とちおとめ', 'さがほのか'].sample }
+
+        let(:pack) do
+          strawberry1 = Strawberry2.factory(type, size: size1)
+          strawberry2 = Strawberry2.factory(type, size: size2)
+          strawberry3 = Strawberry2.factory(type, size: size3)
+          Strawberry2Pack.new(strawberry1, strawberry2, strawberry3)
+        end
+
+        subject { pack.max_size_diff }
+
+        it { is_expected.to eq expected }
+      end
     end
   end
 end
