@@ -12,4 +12,30 @@ describe StrawberrySize do
       end
     end
   end
+
+  describe '#diff' do
+    [
+      { one: StrawberrySize.double_large, another: StrawberrySize.double_large, expected: 0 },
+      { one: StrawberrySize.double_large, another: StrawberrySize.large,        expected: 1 },
+      { one: StrawberrySize.double_large, another: StrawberrySize.medium,       expected: 2 },
+      { one: StrawberrySize.double_large, another: StrawberrySize.small,        expected: 3 },
+      { one: StrawberrySize.large,        another: StrawberrySize.double_large, expected: 1 },
+      { one: StrawberrySize.large,        another: StrawberrySize.large,        expected: 0 },
+      { one: StrawberrySize.large,        another: StrawberrySize.medium,       expected: 1 },
+      { one: StrawberrySize.large,        another: StrawberrySize.small,        expected: 2 },
+      { one: StrawberrySize.medium,       another: StrawberrySize.double_large, expected: 2 },
+      { one: StrawberrySize.medium,       another: StrawberrySize.large,        expected: 1 },
+      { one: StrawberrySize.medium,       another: StrawberrySize.medium,       expected: 0 },
+      { one: StrawberrySize.medium,       another: StrawberrySize.small,        expected: 1 },
+      { one: StrawberrySize.small,        another: StrawberrySize.double_large, expected: 3 },
+      { one: StrawberrySize.small,        another: StrawberrySize.large,        expected: 2 },
+      { one: StrawberrySize.small,        another: StrawberrySize.medium,       expected: 1 },
+      { one: StrawberrySize.small,        another: StrawberrySize.small,        expected: 0 },
+    ].each do |param|
+      context "one=#{param[:one]}, another=#{param[:another]}" do
+        subject { param[:one].diff(param[:another]) }
+        it { is_expected.to eq param[:expected] }
+      end
+    end
+  end
 end
