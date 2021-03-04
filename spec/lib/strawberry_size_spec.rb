@@ -1,21 +1,15 @@
 describe StrawberrySize do
-  it do
-    size = StrawberrySize.double_large
-    expect(size.to_s).to eq 'LL'
-  end
-
-  it do
-    size = StrawberrySize.large
-    expect(size.to_s).to eq 'L'
-  end
-
-  it do
-    size = StrawberrySize.medium
-    expect(size.to_s).to eq 'M'
-  end
-
-  it do
-    size = StrawberrySize.small
-    expect(size.to_s).to eq 'S'
+  describe '#to_s' do
+    [
+      { subject: StrawberrySize.double_large, description: 'double large size', expected: 'LL' },
+      { subject: StrawberrySize.large,        description: 'large size', expected: 'L' },
+      { subject: StrawberrySize.medium,       description: 'medium size', expected: 'M' },
+      { subject: StrawberrySize.small,        description: 'small size', expected: 'S' }
+    ].each do |testcase|
+      describe testcase[:description] do
+        subject { testcase[:subject].to_s }
+        it { is_expected.to eq testcase[:expected] }
+      end
+    end
   end
 end
