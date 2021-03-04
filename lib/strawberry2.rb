@@ -1,5 +1,5 @@
 class Strawberry2
-  attr_reader :type, :size
+  attr_reader :type
 
   private def initialize(type, size)
     @type = type
@@ -18,13 +18,16 @@ class Strawberry2
   end
 
   def size_diff_from(another)
-    size_value = {
-      'S' => 1,
-      'M' => 2,
-      'L' => 3,
-      'LL' => 4
-    }
-    (size_value[self.size] - size_value[another.size]).abs
+    self.size.diff(another.size)
+  end
+
+  def size
+    {
+      'S' => StrawberrySize.small,
+      'M' => StrawberrySize.medium,
+      'L' => StrawberrySize.large,
+      'LL' => StrawberrySize.double_large
+    }[@size]
   end
 
   private
