@@ -11,4 +11,9 @@ describe StrawberrySize do
     size = StrawberrySize.large
     expect(size.to_s).to eq 'L'
   end
+
+  it do
+    size = StrawberrySize.medium
+    expect(size.to_s).to eq 'M'
+  end
 end

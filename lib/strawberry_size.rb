@@ -1,9 +1,17 @@
 class StrawberrySize
+  private def initialize(size)
+    @size = size
+  end
+
   def self.large
-    new
+    new('L')
+  end
+
+  def self.medium
+    new('M')
   end
 
   def to_s
-    'L'
+    @size
   end
 end
